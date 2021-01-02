@@ -1,16 +1,21 @@
-const key='a5746f35427d123f305a50cf8c83d366'
 const weatherDiv=document.querySelector('#weather')
 let weatherResponse="Παρακαλώ περιμένετε...."
 weatherDiv.innerText=weatherResponse
 
 function getWeather(){
-    fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=Katerini&lang=el&units=metric&appid=${key}`,
-        {method:'GET'})//metric gia vathmoys celsiu
-        .then(response=>response.json())
-        .then(json=>weatherDiv.innerHTML=`${json.weather[0].description}  ( Θεμοκρασία: ${json.main.temp} <sup>o</sup> Κελσίου ) `)
-        .then(setWeatherText())
-        .catch(error=>console.error('error:',error))
+    let res= 200
+    return new Promise((resolve,reject)=>{//resolve an pane ola kala,reject an kati den paei kala
+        setTimeout(()=>{
+            weatherResponse='Ήλιος';
+            if (res==200)
+              resolve()//me stelnei sto then to getWeather
+            else
+              reject('Error loading page...')//to reject stelnei san parametro sto error catch
+           
+            
+        },2000); 
+
+    })
    
 }
 
@@ -19,6 +24,18 @@ function setWeatherText(){
     weatherDiv.innerText=weatherResponse
 }
 
+function moreText(){
+    if (weatherResponse='Βροχή'){
+        weatherResponse+=', πάρε ομπρέλα'
+    }
+    if (weatherResponse='Ήλιος'){
+        weatherResponse+=', πάρε καπέλο'
+    }
+    weatherDiv.innerText=weatherResponse
+}
+
 getWeather()
+    .then(moreText)//otan den exoyme sfalma sto promise or .then(setWatherText)
+    .catch((err)=>weatherDiv.innerText=err)
 
-
+//getWeather(moreText)
