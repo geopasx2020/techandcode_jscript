@@ -16,5 +16,5 @@ function getWeather(){
 }
 
 setTimeout(()=>{weatherResponse=getWeather()},3000);//emfanizetai afto poy exei mikrotero time
-setTimeout(()=>{weatherDiv.innerText=weatherResponse},6000);
+//setTimeout(()=>{weatherDiv.innerText=weatherResponse},6000);
 weatherDiv.innerText=weatherResponse
