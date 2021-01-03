@@ -5,10 +5,10 @@ weatherDiv.innerText=weatherResponse
 
 function getWeather(){
     fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=Katerini&lang=el&units=metric&appid=${key}`,
+        `http://api.openweathermap.org/data/2.5/weather?q=Kristoni&lang=el&units=metric&appid=${key}`,
         {method:'GET'})//metric gia vathmoys celsiu
         .then(response=>response.json())
-        .then(json=>weatherDiv.innerHTML=`${json.weather[0].description}  ( Θεμοκρασία: ${json.main.temp} <sup>o</sup> Κελσίου ) `)
+        .then(json=>weatherDiv.innerHTML=`Πόλη: ${json.name} Περιγραφή:${json.weather[0].description}  ( Θεμοκρασία: ${json.main.temp} <sup>o</sup> Κελσίου ) `)
         .then(setWeatherText())
         .catch(error=>console.error('error:',error))
    
